@@ -1,0 +1,13 @@
+[Unit]
+Description=NGINX Web Server
+
+[Service]
+# SystemDocker configuration
+Environment='DOCKER_IMAGE=ahmet2mir/rainloop'
+
+# Setup the volumes
+Environment='DOCKER_VOLUME_WEBAPPS_RAINLOOP_DATA=/srv/docker/rainloop/instance/%i/data:/webapps/rainloop/data'
+
+# Create the data directory and change owner
+ExecStartPre=/usr/bin/mkdir -p /srv/docker/rainloop/instance/%i/data
+ExecStartPre=/usr/bin/chown 33:33 /srv/docker/rainloop/instance/%i/data
